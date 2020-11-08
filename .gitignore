@@ -1,0 +1,11 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/.gitignore
+.idea/C.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+CMakeLists.txt
+NullProject/
+cmake-build-debug/
+day1/CMakeLists.txt
+main.c
