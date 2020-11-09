@@ -2,7 +2,6 @@
 .idea/*
 NullProject/
 cmake-build-debug/
-day2/*.txt
 *.txt
 *.xml
 main.c
