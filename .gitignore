@@ -1,7 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea/*
-#NullProject/
-#cmake-build-debug/
-#*.txt
-#*.xml
-#main.c
+NullProject/
+cmake-build-debug/
+*.txt
+*.xml
+main.c
