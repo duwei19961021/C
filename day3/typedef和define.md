@@ -1,13 +1,13 @@
 ##### 浅谈#define和typedef
 
 ```c
+typedef struct s {
     int age;
     int class;
 } stu,*p_stu;
 
 int main(){
     stu s0= {1,2};
-  	p_stu const s2;
     const p_stu s1 = &s0;
     s1->class = 3;
     printf("%d\n",s1->class);
