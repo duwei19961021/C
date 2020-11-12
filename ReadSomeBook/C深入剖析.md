@@ -215,4 +215,166 @@
   }
   ```
 
-  ![](https://upload-images.jianshu.io/upload_images/15150075-59a8fe82de0a6d11.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+  ![ 是](https://upload-images.jianshu.io/upload_images/15150075-59a8fe82de0a6d11.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+- 无法向一个函数传递数组
+
+  - C语言中，当一位数组作为函数参数时，编译器总把它解析成一个指向其首元素地址的指针。
+  - 函数本身没有类型，只有函数的返回值才有类型。
+
+- 能否把指针变量本身传递给一个函数
+
+  main函数中的变量不是全局变量，只不过是它的声明周期和全区变量一样长而已。全局变量定义在函数外部。
+
+- 函数指针的定义
+
+  ```c
+  char* (*func1)(char* p1, char* p2);
+  ```
+
+  func1是一个指针变量，指向一个有两个char\*类型参数且返回值是char\*类型的函数
+
+- \*(int\*)&p
+
+  ```c
+  // 32位
+  void Function(){
+      printf("Call Function.\n");
+  }
+  
+  int main(){
+      void (*p)();
+      *(int*)&p = (int)Function;
+      (*p)();
+      return 0;
+  }
+  ```
+
+  p是一个指针变量，指向一个无参数无返回值的函数；
+
+  (int\*)&p将p的地址强转成int数据类型的指针；
+
+  \*(int\*)&p 就是一个整型，要将函数Function的地址赋值给p得先将其转为整型。
+
+- (\*(void(\*)())0)();
+
+  void(*)()：表示一个指针，指向一个返回值时void且没有参数的函数。
+
+  (void(\*)())0：表示将0强制转换成void(\*)()这个函数指针类型。
+
+  (\*(void(\*)())0)：获取地址0开始的内存中的一段内容(解引用)。
+
+  (\*(void(\*)())0)()：函数调用。
+
+- 函数指针数组
+
+  ```c
+  char* (*pf1)(char *p);		// pf1是一个指向参数是char *类型，返回值时char*的函数的指针
+  char* (*pf2[3])(char *p);	// pf2是函数指针数组
+  ```
+
+  ```c
+  #include <stdio.h>
+  #include <string.h>
+  
+  char * func1(char *p){
+      printf("%s\n",p);
+      return p;
+  }
+  
+  char * func2(char *p){
+      printf("%s\n",p);
+      return p;
+  }
+  
+  char * func3(char *p){
+      printf("%s\n",p);
+      return p;
+  }
+  
+  int main(){
+      char *(*pf[3])(char *);
+      pf[0]=func1;
+      pf[1]=func2;
+      pf[2]=func3;
+      pf[0]("func1");
+      pf[1]("func2");
+      pf[2]("func3");
+      return 0;
+  }
+  ```
+
+- 函数指针数组的指针
+
+  ```c
+  char* (*pf2[3])(char *p);	// pf2是函数指针数组
+  char* (*(*pf2)[3])(char *p);	// pf2是函数指针数组指针
+  ```
+
+- 常见内存错误以及对策
+
+  - 指针没有指向一块合法的内存
+
+    - 结构体成员指针未初始化
+
+      ```c
+      struct student{
+          char *name;
+          int score;
+      }stu,*pstu;
+      
+      int main(){
+          strcpy(stu.name,"jim");
+          stu.score=99;
+          return 0;
+      }
+      ```
+
+      在实例化stu时，给name分配了四字节的内存，但并没有指向合法的地址。调用strcpy往所指向的内存拷贝"jim"，这块内存name指针根本就无权访问，导致出错。
+
+      ```c
+      #include <stdlib.h>
+      #include <stdio.h>
+      
+      struct student{
+          char *name;
+          int score;
+      }stu,*pstu;
+      
+      int main(){
+          stu.name = (char*)malloc(sizeof(char));
+          strcpy(stu.name,"jim");
+          stu.score=99;
+          printf("%s\n",stu.name);
+      
+          free(pstu);
+          return 0;
+      }
+      ```
+
+    - 没有为结构体指针分配足够的内存
+
+    - 函数入口校验
+
+      ```c
+      assert(NULL!=p); // 是一个宏而非函数
+      ```
+
+  - 为指针分配的内存太小
+
+  - 内存分配成功，但未初始化
+
+    ```c
+    int i = 10;
+    char *p = (char *)malloc(sizeof(char));
+    //在不确定变量初始值的时候可以初始化为0或者NULL
+    int i = 0;
+    char *p = NULL;
+    //或者使用memset(起始地址,要被设置的值,要被设置的内存大小);
+    int a[10];
+    memset(a,0,sizeof(a));
+    ```
+
+    
+
+  
