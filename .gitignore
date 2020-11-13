@@ -4,4 +4,3 @@ NullProject/
 cmake-build-debug/
 *.txt
 *.xml
-main.c
