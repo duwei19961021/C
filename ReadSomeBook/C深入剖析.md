@@ -13,7 +13,104 @@
     void func(int a);	//声明一个函数
     ```
 
-    
+- struct
+
+  ```c
+  #include <stdio.h>
+  struct stu
+  {
+  
+  } s1;
+  
+  int main(){
+      printf("%lu\n",sizeof(s1)); // 0
+      return 0;
+  }
+  // 编译器gcc
+  ```
+
+- 柔性数组
+
+  ```c
+  #include <stdio.h>
+  #include <stdlib.h>
+  
+  typedef struct
+  {
+      int a;
+      int b[];
+  } soft_arr;
+  
+  int main()
+  {
+      printf("%lu\n",sizeof(soft_arr)); // 4
+      soft_arr *p = malloc(sizeof(soft_arr)+sizeof(int));
+      free(p);
+      return 0;
+  }
+  
+  ```
+
+  结构中最后一个成员允许是一个未知大小的数组，这个成员叫做柔性数组。sizefo 返回这种类型的大小不包括柔性数组的内存。包含柔性数组成员的结构用malloc进行内存动态分配。(应用：比如网络通信，收发数据包)
+
+- union
+
+  ```c
+  union Person
+  {
+      char *name;
+      int age;
+      char *addr;
+      double balance;
+  };
+  
+  int main()
+  {
+      printf("%lu\n",sizeof(union Person));
+      return 0;
+  }
+  ```
+
+  union维护足够的空间来置放多个成员的某一个成员，而不是为每个数据成员配置空间。在union中所有成员公用一个空间，同一时间只能存储其中一个数据成员，所有数据成员拥有相同的起始地址。
+
+  一个union需要配置足够的空间来容纳所有成员。上述例子中：double占用内存空间最大，所以Person的内存大小是8字节。
+
+  大小端对union的影响：
+
+  ```c
+  union T
+  {
+      char a;
+      int b;
+  };
+  
+  int main()
+  {
+      union T t1;
+      t1.b = 1;
+      printf("%d\n",t1.a);
+      return 0;
+  }
+  ```
+
+  <img src="https://upload-images.jianshu.io/upload_images/15150075-33c893aeed324c98.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png" style="zoom:67%;" />
+
+- enum
+
+  ```c
+  enum Color
+  {
+      RED,
+      BLACK,
+      WHITE,
+      YELLOW,
+  };
+  
+  int main(){
+      RED = 3; // expression is not assignable
+      return 0;
+  }
+  ```
 
 - auto
 
