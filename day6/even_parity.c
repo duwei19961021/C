@@ -11,5 +11,8 @@ int even_parity(int value)
 int main(){
     int ret = even_parity(-11);
     printf("ret = %d\n",ret);
+    for (int i = -10000; i < 10000; ++i) {
+        printf("%d:%d\n",i,even_parity(i));
+    }
     return 0;
 }
