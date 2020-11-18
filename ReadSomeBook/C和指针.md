@@ -357,6 +357,150 @@ int matrix[3][10];
 
 - *(matrix+1)+5
 
-  ![image.png](https://upload-images.jianshu.io/upload_images/15150075-921e9fc90ec740f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+  ![](https://upload-images.jianshu.io/upload_images/15150075-921e9fc90ec740f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-###### 8.2.4 指向数组的指针
+##### 8.5 总结
+
+- 在绝大多数表达式中，数组名是指向数组第一个元素的指针。只有两个规则例外：
+  - sizeof(arr)，返回整个数组占用的字节，而不是返回指针占用的字节。
+  - &arr，单目操作符&返回一个指向整个数组的指针，而不是指向数组第一个元素的指针的指针。
+- 指针和数组不相等。
+  - 声明一个数组，同时也分配了一些内存，用于容纳数组元素。
+  - 声明一个指针，只分配用于容纳指针本身的空间。
+- 当数组名作为函数参数传递。实际传递的是一个指向数组第一个元素的指针。函数所接收到的参数实际上是原参数的一份拷贝，所以函数可以对其进行操纵而不影响实际的参数。但是对指针执行间接访问操作允许函数修改原先数组的元素。
+- 数组形参既可以声明成数组也可以声明成指针，这两种声明形式只有当他们作为函数形参时才相等。
+
+#### 第九章 字符串、字符和字节
+
+##### 9.1 字符串基础
+
+字符串是一串零个或多个字符，以NUL结尾。
+
+##### 9.3 不受限制的字符串函数
+
+###### 9.3.1 复制字符串
+
+char *strcpy(char *dst, char const *src);
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char dest[] = "abcde";
+    strcpy(dest,"xyz");
+    printf("%s\n",dest); // xyz
+    return 0;
+}
+```
+
+目标参数以前的内容将被覆盖，即使新的字符串比dest原先的内存更短。(NUL也会被复制)
+
+![image.png](https://upload-images.jianshu.io/upload_images/15150075-5f82cd2ae2a6e440.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+###### 9.3.2 连接字符串
+
+char * strcat(char *dst, char const *src);
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char message[100] = {0};
+    strcat(message,"hello");
+    strcat(message," world");
+    printf("%s\n",message);
+    return 0;
+}
+```
+
+###### 9.3.3 函数的返回值。
+
+strcpy和strcat都返回它们第一个参数的一份拷贝，就是指向目标字符数组的指针。
+
+###### 9.3.4 字符串比较
+
+int strcmp(char const *s1, char const *s2);
+
+```
+int main()
+{
+    int ret = strcmp("duwei","zhangsan");
+    /*
+    if (ret){ // ret的值有三种情况：大于0，等于0，小于0。将其用bool值表达是一种坏风格，正确的方式是将其与0值进行比较
+        printf("duwei > zhangsan");
+    }
+    */
+    if (ret > 0){
+        printf("duwei > zhangsan");
+    }
+    return 0;
+}
+```
+
+##### 9.5 字符串查找
+
+###### 9.5.1 查找一个字符
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char message[] = "learn C language.";
+
+    char *p1 = strchr(message,'a'); // 返回第一次出现的位置
+    printf("p1 - message = %lu\n",p1-message);
+
+    char *p2 = strrchr(message, 'a'); // 返回最后一次出现的位置
+    printf("p2 - message = %lu\n",p2-message);
+    return 0;
+}
+```
+
+###### 9.5.2 查找任何几个字符
+
+char *strpbrk(char const *str, char const *group); 查找一组字符串在字符串中第一次出现的位置。
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char message[] = "learn C language.";
+
+    char *p = strpbrk(message,"zC"); // 返回z或者C第一次出现的位置，
+
+    printf("%s\n",p);
+    return 0;
+}
+```
+
+###### 9.5.3 查找一个子串
+
+char *strstr(char const *s1, char const *s2);
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char message[] = "learn C language.";
+
+    char *p = strstr(message,"lang");
+
+    printf("%s\n",p);
+    return 0;
+}
+```
+
+##### 9.9 内存操作
+
+
+
