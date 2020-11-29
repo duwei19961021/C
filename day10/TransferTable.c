@@ -35,19 +35,19 @@ int main() {
         case 1:
             printf("输入两个数组(example:12 13):\n");
             scanf("%d %d",&x,&y);
-            printf("result = %lf\n",oper_func[0](x,y));break;
+            printf("result = %lf\n",oper_func[selector-1](x,y));break;
         case 2:
             printf("输入两个数组(example:12 13):\n");
             scanf("%d %d",&x,&y);
-            printf("result = %lf\n",oper_func[1](x,y));break;
+            printf("result = %lf\n",oper_func[selector-1](x,y));break;
         case 3:
             scanf("%d %d",&x,&y);
             printf("输入两个数组(example:12 13):\n");
-            printf("result = %lf\n",oper_func[2](x,y));break;
+            printf("result = %lf\n",oper_func[selector-1](x,y));break;
         case 4:
             scanf("%d %d",&x,&y);
             printf("输入两个数组(example:12 13):\n");
-            printf("result = %lf\n",oper_func[3](x,y));break;
+            printf("result = %lf\n",oper_func[selector-1](x,y));break;
         case 0:
             exit(0);
         default:
