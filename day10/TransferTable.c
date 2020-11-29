@@ -28,6 +28,7 @@ int main() {
     int x,y;
     printf("1、add          2、sub\n");
     printf("3、mul          4、div\n");
+    printf("0.exit\n");
     printf("选择运算符：\n");
     scanf("%d",&selector);
     switch (selector) {
