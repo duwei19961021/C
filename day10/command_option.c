@@ -8,7 +8,7 @@ int option_a, option_b;
 
 int main(int argc, char **argv)
 {
-    while (*++argv != NULL && **argv == '-'){ // 检查每个参数是否是 '-' 开头
+    while (*++argv != NULL && **argv == '-'){ // 检查参数是否是 '-' 开头，遇见不是 '-' 开头的参数终止循环
         switch (*++*argv) { //检查 '-' 后面的字母, *argv表示数组的地址，解引用之后表示第一个元素，第一个元素又是指针，进行++之后表示从第二个字符开始的位置(指针)，再解引用表示字符。
             case 'a':
                 option_a = TRUE;
