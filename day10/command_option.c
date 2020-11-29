@@ -1,8 +1,12 @@
 #include <stdio.h>
 #define TRUE 1
 
-void process_standard_input(void );
-void process_file(char *file_name);
+void process_standard_input(void ){
+
+}
+void process_file(char *file_name){
+
+}
 
 int option_a, option_b;
 
@@ -19,7 +23,7 @@ int main(int argc, char **argv)
         }
     }
 
-    if (*argv == NULL){ // 这里是根据传入参数进行不同的处理，具体的处理函数没有实现
+    if (argv == NULL){ // 这里是根据传入参数进行不同的处理，具体的处理函数没有实现
         process_standard_input();
     } else{
         do {
