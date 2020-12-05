@@ -15,9 +15,7 @@ void SeqListInit(SL *ps)
 void SeqListPushBack(SL* ps, SLDataType x)
 {
     assert(ps);
-    printf("size=%d,cap=%d\n",ps->size,ps->cap);
     if (ps->size >= ps->cap){
-        printf("bool = %d\n",ps->size >= ps->cap);
         ps->a = (SLDataType *)realloc(ps->a,sizeof(SL)*ps->cap*2);
         if (NULL == ps->a){
             printf("realloc() failed when Push");
