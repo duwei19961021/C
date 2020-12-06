@@ -20,4 +20,4 @@ void SeqListPopBack(SL* ps);
 void SeqListPushFront(SL* ps, SLDataType x);
 void SeqListPopFront(SL* ps);
 void SeqListInsert(SL* ps, int pos, SLDataType x);
-void SeqListErase(SL* ps, int pos, SLDataType x);
+void SeqListErase(SL* ps, int pos);

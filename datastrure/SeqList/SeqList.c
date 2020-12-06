@@ -60,15 +60,29 @@ void SeqListPushFront(SL* ps, SLDataType x)
 
 void SeqListPopFront(SL* ps)
 {
-    ;
+    assert(ps);
+    for (int i = 0; i < ps->size; ++i) {
+        ps->a[i] = ps->a[i+1];
+    }
+    ps->size--;
 }
 
 void SeqListInsert(SL* ps, int pos, SLDataType x)
 {
-    ;
+    assert(ps);
+    SeqListCheckCap(ps);
+    for (int i = ps->size-1; i >= pos; i--) {
+        ps->a[i+1] = ps->a[i];
+    }
+    ps->a[pos] = x;
+    ps->size++;
 }
 
-void SeqListErase(SL* ps, int pos, SLDataType x)
+void SeqListErase(SL* ps, int pos)
 {
-    ;
+    assert(ps);
+    for (int i = pos; i <= ps->size; i++) {
+        ps->a[i] = ps->a[i+1];
+    }
+    ps->size--;
 }
