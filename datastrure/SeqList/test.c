@@ -18,6 +18,17 @@ void TestSeqList1()
     SeqListPopBack(&s);
     SeqListPopBack(&s);
     SeqListPrint(&s);
+    SeqListPushFront(&s,999);
+    SeqListPushFront(&s,999);
+    SeqListPushFront(&s,999);
+    SeqListPushFront(&s,999);
+    SeqListPushFront(&s,999);
+    SeqListPushFront(&s,999);
+    SeqListPushFront(&s,999);
+    SeqListPushFront(&s,999);
+    SeqListPushFront(&s,999);
+    SeqListPrint(&s);
+    printf("size=%d,cap=%d\n",s.size,s.cap);
 }
 int main()
 {

@@ -14,6 +14,7 @@ typedef struct SeqList
 
 void SeqListInit(SL *ps);
 void SeqListPrint(SL *ps);
+void SeqListCheckCap(SL* ps);
 void SeqListPushBack(SL* ps, SLDataType x);
 void SeqListPopBack(SL* ps);
 void SeqListPushFront(SL* ps, SLDataType x);

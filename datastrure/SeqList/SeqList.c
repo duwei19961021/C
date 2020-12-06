@@ -12,17 +12,22 @@ void SeqListInit(SL *ps)
     ps->cap=4;
 }
 
-void SeqListPushBack(SL* ps, SLDataType x)
+void SeqListCheckCap(SL *ps)
 {
-    assert(ps);
     if (ps->size >= ps->cap){
         ps->a = (SLDataType *)realloc(ps->a,sizeof(SL)*ps->cap*2);
         if (NULL == ps->a){
-            printf("realloc() failed when Push");
+            printf("realloc() failed");
             exit(-1);
         }
         ps->cap*=2;
     }
+}
+
+void SeqListPushBack(SL* ps, SLDataType x)
+{
+    assert(ps);
+    SeqListCheckCap(ps);
     ps->a[ps->size] = x;
     ps->size++;
 }
@@ -44,7 +49,13 @@ void SeqListPopBack(SL* ps)
 
 void SeqListPushFront(SL* ps, SLDataType x)
 {
-    ;
+    assert(ps);
+    SeqListCheckCap(ps);
+    for (int i = ps->size-1; i >= 0; i--) {
+        ps->a[i+1] = ps->a[i];
+    }
+    ps->a[0]=x;
+    ps->size++;
 }
 
 void SeqListPopFront(SL* ps)
