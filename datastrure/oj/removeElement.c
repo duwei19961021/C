@@ -25,7 +25,7 @@ int removeElement(int* nums, int numsSize, int val)
 
 int main()
 {
-    int arr[] = {2};
+    int arr[] = {3,2,3,3,2};
     int numsSize = sizeof(arr) / sizeof(int );
     int ret = removeElement(arr,numsSize,3);
     printf("ret=%d\n",ret);
