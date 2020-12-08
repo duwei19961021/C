@@ -1,4 +1,5 @@
 #include "SList.h"
+#include <stdlib.h>
 
 void Test()
 {
@@ -6,10 +7,27 @@ void Test()
     SListPushBack(&pList,1);
     SListPushBack(&pList,2);
     SListPushBack(&pList,3);
-    SListPushBack(&pList,4);
-    SListPushBack(&pList,5);
-    SListPushBack(&pList,6);
-    SListPushBack(&pList,7);
+    SListPrint(pList);
+    printf("NULL\n");
+    SListPopBack(&pList);
+    SListPopBack(&pList);
+    SListPopBack(&pList);
+    SListPopBack(&pList);
+    SListPushFront(&pList,100);
+    SListPushFront(&pList,99);
+    SListPushFront(&pList,98);
+    SListPushFront(&pList,97);
+    SListPushFront(&pList,96);
+    SListPrint(pList);
+    printf("NULL\n");
+    SListPopFront(&pList);
+    SListPopFront(&pList);
+    SListPrint(pList);
+    printf("NULL\n");
+    SListNode* point = SListFind(pList,99);
+    printf("point = %d\n",point->data);
+    point->data = 9999;
+    free(point);
     SListPrint(pList);
     printf("NULL\n");
 }

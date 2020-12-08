@@ -38,3 +38,76 @@ void SListPushBack(SListNode** pphead, SListDataType x)
         tail->next=newNode;
     }
 }
+
+void SListPopBack(SListNode** pphead)
+{
+    if (NULL == *pphead){
+        return;
+    } else if (NULL == (*pphead)->next){
+        free(*pphead);
+        *pphead = NULL;
+    } else{
+        SListNode* tail = *pphead;
+        while (NULL != tail->next->next){
+            tail = tail->next;
+        }
+        free(tail->next);
+        tail->next = NULL;
+    }
+}
+
+void SListPushFront(SListNode** pphead, SListDataType x)
+{
+    SListNode* newNode = CreateSListNode(x);
+    if (NULL == *pphead){
+        *pphead = newNode;
+    } else{
+        newNode->next = *pphead;
+        *pphead = newNode;
+    }
+}
+
+void SListPopFront(SListNode** pphead)
+{
+    if (NULL == *pphead){
+        return;
+    } else{
+        SListNode* front = *pphead;
+        *pphead = (*pphead)->next;
+        free(front);
+    }
+}
+
+SListNode* SListFind(SListNode* phead, SListDataType x)
+{
+    SListNode* point = (SListNode*)malloc(sizeof(SListNode));
+    point = phead;
+    while (NULL != point){
+        if (x == point->data){
+            return point;
+        }
+        point = point->next;
+    }
+    return NULL;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
