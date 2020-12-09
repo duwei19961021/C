@@ -91,8 +91,36 @@ SListNode* SListFind(SListNode* phead, SListDataType x)
     return NULL;
 }
 
+void SListInsertAfter(SListNode* pos, SListDataType x)
+{
+    SListNode* newNode = CreateSListNode(x);
+    newNode->next = pos->next->next;
+    pos->next = newNode;
+}
 
+void SListEraseAfter(SListNode* pos)
+{
+    SListNode* target = pos->next;
+    if (NULL != target)
+    {
+        SListNode* targetNext = target->next;
+        free(target);
+        pos->next = targetNext;
+    }
+}
 
+void SListDestory(SListNode* phead)
+{
+    SListNode *p = NULL, *q = NULL;
+    p = phead;
+    while (NULL != p)
+    {
+        q = p->next;
+        free(q);
+        p=p->next;
+    }
+    phead = NULL;
+}
 
 
 

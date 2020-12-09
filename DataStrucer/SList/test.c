@@ -27,7 +27,11 @@ void Test()
     SListNode* point = SListFind(pList,99);
     printf("point = %d\n",point->data);
     point->data = 9999;
-    free(point);
+    SListEraseAfter(point);
+    SListPrint(pList);
+    printf("NULL\n");
+    printf("hello\n");
+    SListDestory(pList);
     SListPrint(pList);
     printf("NULL\n");
 }
