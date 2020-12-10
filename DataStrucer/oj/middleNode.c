@@ -38,3 +38,22 @@ struct ListNode* middleNode(struct ListNode* head){
     }
     return cur2;
 }
+
+
+struct ListNode* middleNode(struct ListNode* head){
+    struct ListNode* quick = head;
+    struct ListNode* slow = head;
+    while(quick->next) // quick的下一个节点为空则表示已经走到最后一个节点了
+    {
+        if(quick->next->next == NULL) // 当链表节点是偶数时要考虑quick指针在在最后一次移动时是否能移动两步
+        {
+            quick = quick->next; // 最后一次不能移动两步那么就移动一步
+        }
+        else
+        {
+            quick = quick->next->next;
+        }
+        slow = slow->next; // 每次移动一步
+    }
+    return slow;
+}
