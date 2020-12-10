@@ -1,39 +1,56 @@
 #include "SList.h"
 #include <stdlib.h>
 
+SListNode* removeElements(SListNode* phead, int val){
+    SListNode *pre = phead;
+    while (val == pre->data){
+        if (NULL == pre->next)
+        {
+            pre=NULL;
+            return pre;
+        }
+        pre = pre->next;
+    }
+    SListNode *cur = pre;
+    SListNode *check = pre;
+    while (NULL != cur->next)
+    {
+        check = cur->next;
+        if (val == check->data)
+        {
+            cur->next = check->next;
+        } else{
+            cur = cur->next;
+        }
+    }
+    return pre;
+}
+
 void Test()
 {
     SListNode* pList = NULL;
-    SListPushBack(&pList,1);
-    SListPushBack(&pList,2);
+    SListPushBack(&pList,6);
+    SListPushBack(&pList,6);
+    SListPushBack(&pList,6);
+    SListPushBack(&pList,6);
     SListPushBack(&pList,3);
+    SListPushBack(&pList,3);
+    SListPushBack(&pList,2);
+    SListPushBack(&pList,6);
+    SListPushBack(&pList,6);
+    SListPushBack(&pList,3);
+    SListPushBack(&pList,3);
+    SListPushBack(&pList,4);
+    SListPushBack(&pList,5);
+    SListPushBack(&pList,5);
+    SListPushBack(&pList,6);
+    SListPushBack(&pList,6);
+    SListPushBack(&pList,6);
+    SListPushBack(&pList,6);
+    SListPushBack(&pList,6);
     SListPrint(pList);
-    printf("NULL\n");
-    SListPopBack(&pList);
-    SListPopBack(&pList);
-    SListPopBack(&pList);
-    SListPopBack(&pList);
-    SListPushFront(&pList,100);
-    SListPushFront(&pList,99);
-    SListPushFront(&pList,98);
-    SListPushFront(&pList,97);
-    SListPushFront(&pList,96);
-    SListPrint(pList);
-    printf("NULL\n");
-    SListPopFront(&pList);
-    SListPopFront(&pList);
-    SListPrint(pList);
-    printf("NULL\n");
-    SListNode* point = SListFind(pList,99);
-    printf("point = %d\n",point->data);
-    point->data = 9999;
-    SListEraseAfter(point);
-    SListPrint(pList);
-    printf("NULL\n");
-    printf("hello\n");
-    SListDestory(pList);
-    SListPrint(pList);
-    printf("NULL\n");
+    SListNode *ret = removeElements(pList,6);
+    SListPrint(ret);
 }
 
 int main()

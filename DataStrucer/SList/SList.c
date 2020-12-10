@@ -23,6 +23,7 @@ void SListPrint(SListNode* phead)
         printf("%d->",phead->data);
         phead = phead->next;
     }
+    printf("NULL\n");
 }
 
 void SListPushBack(SListNode** pphead, SListDataType x)
