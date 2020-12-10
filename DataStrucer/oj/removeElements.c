@@ -7,22 +7,31 @@
  * 删除链表中等于给定值 val 的所有节点。
  * */
 
-SListNode* removeElements(SListNode* phead, int val){
-    if (NULL == phead)
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+
+struct ListNode* removeElements(struct ListNode* head, int val){
+    if (NULL == head)
     {
-        return phead;
+        return head;
     }
-    SListNode *pre = NULL;
-    SListNode *cur = phead;
+    struct ListNode *pre = NULL;
+    struct ListNode *cur = head;
     while (cur)
     {
-        if (cur->data == val)
+        if (cur->val == val)
         {
-            if (cur==phead)
+            if (cur==head)
             {
-                phead = cur->next;
+                head = cur->next;
                 free(cur);
-                cur = phead;
+                cur = head;
             } else{
                 pre->next = cur->next;
                 free(cur);
@@ -33,5 +42,5 @@ SListNode* removeElements(SListNode* phead, int val){
             cur = cur->next;
         }
     }
-    return phead;
+    return head;
 }
