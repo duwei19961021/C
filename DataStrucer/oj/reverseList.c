@@ -30,4 +30,8 @@ struct ListNode* reverseList(struct ListNode* head){
         curent = next;
     }
     return pHead;
+    /*
+     * 返回的是pHead的值，这个值是堆上的一个地址
+     * 所以并没有错，如果返回pHead的地址就是错的
+     * */
 }
