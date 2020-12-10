@@ -30,25 +30,37 @@ SListNode* removeElements(SListNode* phead, int val){
     return phead;
 }
 
+SListNode* FindKthTotal(SListNode* phead, int k)
+{
+    SListNode *slow = phead;
+    SListNode *quick = phead;
+    for (int i = 0; i < k; ++i) {
+        quick=quick->next;
+    }
+    while (quick)
+    {
+        slow = slow->next;
+        quick = quick->next;
+    }
+    return slow;
+}
+
 void Test()
 {
     SListNode* pList = NULL;
     SListPushBack(&pList,1);
-    SListPushBack(&pList,1);
-    SListPushBack(&pList,1);
-    SListPushBack(&pList,1);
-    SListPushBack(&pList,1);
-    SListPushBack(&pList,1);
     SListPushBack(&pList,2);
-    SListPushBack(&pList,1);
+    SListPushBack(&pList,3);
+    SListPushBack(&pList,4);
+    SListPushBack(&pList,5);
+    SListPushBack(&pList,6);
     SListPrint(pList);
-    SListNode *ret = removeElements(pList,1);
-    SListPrint(ret);
+    SListNode *ret = FindKthTotal(pList,1);
+    printf("ret = %d\n",ret->data);
 }
 
 int main()
 {
-    SListNode* pList = NULL;
     Test();
     return 0;
 }
