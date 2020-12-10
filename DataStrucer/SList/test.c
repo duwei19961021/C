@@ -2,54 +2,47 @@
 #include <stdlib.h>
 
 SListNode* removeElements(SListNode* phead, int val){
-    SListNode *pre = phead;
-    while (val == pre->data){
-        if (NULL == pre->next)
-        {
-            pre=NULL;
-            return pre;
-        }
-        pre = pre->next;
-    }
-    SListNode *cur = pre;
-    SListNode *check = pre;
-    while (NULL != cur->next)
+    if (NULL == phead)
     {
-        check = cur->next;
-        if (val == check->data)
+        return phead;
+    }
+    SListNode *pre = NULL;
+    SListNode *cur = phead;
+    while (cur)
+    {
+        if (cur->data == val)
         {
-            cur->next = check->next;
+            if (cur==phead)
+            {
+                phead = cur->next;
+                free(cur);
+                cur = phead;
+            } else{
+                pre->next = cur->next;
+                free(cur);
+                cur = pre->next;
+            }
         } else{
+            pre = cur;
             cur = cur->next;
         }
     }
-    return pre;
+    return phead;
 }
 
 void Test()
 {
     SListNode* pList = NULL;
-    SListPushBack(&pList,6);
-    SListPushBack(&pList,6);
-    SListPushBack(&pList,6);
-    SListPushBack(&pList,6);
-    SListPushBack(&pList,3);
-    SListPushBack(&pList,3);
+    SListPushBack(&pList,1);
+    SListPushBack(&pList,1);
+    SListPushBack(&pList,1);
+    SListPushBack(&pList,1);
+    SListPushBack(&pList,1);
+    SListPushBack(&pList,1);
     SListPushBack(&pList,2);
-    SListPushBack(&pList,6);
-    SListPushBack(&pList,6);
-    SListPushBack(&pList,3);
-    SListPushBack(&pList,3);
-    SListPushBack(&pList,4);
-    SListPushBack(&pList,5);
-    SListPushBack(&pList,5);
-    SListPushBack(&pList,6);
-    SListPushBack(&pList,6);
-    SListPushBack(&pList,6);
-    SListPushBack(&pList,6);
-    SListPushBack(&pList,6);
+    SListPushBack(&pList,1);
     SListPrint(pList);
-    SListNode *ret = removeElements(pList,6);
+    SListNode *ret = removeElements(pList,1);
     SListPrint(ret);
 }
 

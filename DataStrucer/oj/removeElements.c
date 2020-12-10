@@ -8,28 +8,30 @@
  * */
 
 SListNode* removeElements(SListNode* phead, int val){
-    SListNode *pre = phead;
-    while (val == pre->data){
-        /*
-         * 先判断头是否等于val*/
-        if (NULL == pre->next)
-        {
-            pre=NULL;
-            return pre;
-        }
-        pre = pre->next;
-    }
-    SListNode *cur = pre;
-    SListNode *check = pre;
-    while (NULL != cur->next)
+    if (NULL == phead)
     {
-        check = cur->next;
-        if (val == check->data)
+        return phead;
+    }
+    SListNode *pre = NULL;
+    SListNode *cur = phead;
+    while (cur)
+    {
+        if (cur->data == val)
         {
-            cur->next = check->next;
+            if (cur==phead)
+            {
+                phead = cur->next;
+                free(cur);
+                cur = phead;
+            } else{
+                pre->next = cur->next;
+                free(cur);
+                cur = pre->next;
+            }
         } else{
+            pre = cur;
             cur = cur->next;
         }
     }
-    return pre;
+    return phead;
 }
