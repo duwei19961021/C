@@ -31,7 +31,7 @@ struct ListNode* middleNode(struct ListNode* head){
     int i = count/2 + 1;
 
     struct ListNode *cur2 = head;
-    while(i>1)
+    while(i>1) // 返回第i个节点则需要循环i-1次，因为初始指向第一个节点。
     {
         cur2 = cur2->next;
         i--;
