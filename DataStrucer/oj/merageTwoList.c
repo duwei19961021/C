@@ -56,7 +56,7 @@ struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2){
         tail = tail->next;
     }
 
-    // 比较完之后，不为空的链表追加到新链表最后
+    // 比较完之后，不为空的链表追加到新链表表
     if(l1)
     {
         tail->next = l1;
