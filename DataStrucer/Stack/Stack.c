@@ -25,7 +25,7 @@ void StackDestory(Stack* pst)
 
 void StackPush(Stack* pst, STDataType x)
 {
-//    assert(pst);
+    assert(pst);
     if (pst->_top == pst->_capacity)
     {
         pst->_a = (STDataType*)realloc(pst->_a,sizeof(STDataType)*pst->_capacity*2);
