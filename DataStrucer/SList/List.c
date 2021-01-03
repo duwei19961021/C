@@ -122,21 +122,3 @@ void SListDestory(SListNode* phead)
     }
     phead = NULL;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
