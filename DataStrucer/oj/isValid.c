@@ -99,7 +99,7 @@ bool isValid(char * s){
         }
         else
         {
-            if (StackEmpty(&ps)) // 能走到这里说明*s还没遍历完到末尾，但是栈却空了，起收括号对不上
+            if (StackEmpty(&ps)) // 能走到这里说明*s还没遍历完到末尾，但是栈却空了(有起括号没收括号)
             {
                 return 0;
             }
@@ -120,7 +120,8 @@ bool isValid(char * s){
             s++;
         }
     }
-    int ret = StackEmpty(&ps); // 循环走完如果栈不为空，则说明括号起和括号收的数量对不上，则必不可能满足要求
+    int ret = StackEmpty(&ps); // 循环走完如果栈不为空，则说明括号起和括号收的数量对不上，则必不可能满足要求(有收括号没起括号)
+    StackDestory(&ps);
     StackDestory(&ps);
     return ret;
 }
