@@ -90,11 +90,6 @@ bool isValid(char * s){
     Stack ps;
     StackInit(&ps);
 
-    if(strlen(s) <= 1)
-    {
-        return 0;
-    }
-
     while (*s)
     {
         if (*s == '{' || *s == '[' || *s == '(') // 如果是括号起，压入栈中
@@ -104,7 +99,7 @@ bool isValid(char * s){
         }
         else
         {
-            if (StackEmpty(&ps)) // s遍历完之后，如果栈为空说明没有括号起，则比不可能满足需求(example: )))
+            if (StackEmpty(&ps)) // 能走到这里说明*s还没遍历完到末尾，但是栈却空了，起收括号对不上
             {
                 return 0;
             }
