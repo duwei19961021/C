@@ -73,7 +73,7 @@ class Solution {
                 }
                 else
                 {
-                    first->next = next->next;
+                    first->next = next;
                     first = first->next;
                     cur = first;
                     next = first->next;
