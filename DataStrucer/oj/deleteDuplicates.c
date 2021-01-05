@@ -43,3 +43,46 @@ struct ListNode* deleteDuplicates(struct ListNode* head){
     }
     return head;
 }
+
+
+/*
+ * 写法2
+ * */
+
+/*
+struct ListNode {
+    int val;
+    struct ListNode *next;
+    ListNode(int x) :
+        val(x), next(NULL) {
+    }
+};
+*/
+class Solution {
+        public:
+        ListNode* deleteDuplication(ListNode* pHead)
+        {
+            struct ListNode* first = pHead;
+            struct ListNode* cur = pHead;
+            struct ListNode* next = cur->next;
+            while(next)
+            {
+                if(cur->val == next->val)
+                {
+                    next = next->next;
+                }
+                else
+                {
+                    first->next = next->next;
+                    first = first->next;
+                    cur = first;
+                    next = first->next;
+                }
+            }
+            if(cur != next)
+            {
+                cur->next=NULL;
+            }
+            return pHead;
+        }
+};
