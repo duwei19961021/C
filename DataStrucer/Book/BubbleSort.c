@@ -63,4 +63,5 @@ int main()
     printf("after sorted: ");
     PrintArray(arr,N);
 
+    return 0;
 }
