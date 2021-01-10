@@ -9,6 +9,7 @@ typedef int HPDataType;
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 
 typedef struct Heap
 {
@@ -22,5 +23,6 @@ void HeapDestory(Heap* php);
 void HeapPush(Heap* php, HPDataType x);
 void HeapPop(Heap* php);
 HPDataType HeapTop(Heap* php);
+void HeapSort(Heap* php,int n);
 
 #endif //C_HEAP_H
