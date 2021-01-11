@@ -24,3 +24,4 @@ int QueueSize(Queue* pq);
 int QueueIsEmpty(Queue* pq); // 1是空,0是非空
 STDataType QueueFront(Queue* pq);
 int QueueIsFull(Queue* pq);
+STDataType QueueBack(Queue* pq);

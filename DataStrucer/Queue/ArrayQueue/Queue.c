@@ -4,6 +4,7 @@
 
 #include "Queue.h"
 
+
 void QueueInit(Queue* pq,int size)
 {
     pq->_size = size;
@@ -16,6 +17,26 @@ void QueueInit(Queue* pq,int size)
 
     pq->_front = pq->_rear = 0;
 }
+
+
+/*
+ Queue* QueueInit(int size)
+{
+    Queue *pq = (Queue*)malloc(sizeof(Queue));
+    if (!pq)
+    {
+        printf("malloc failed.\n");
+        exit(-1);
+    }
+
+    pq->_size = size;
+    pq->_a = (STDataType*)malloc(sizeof(STDataType)*pq->_size);
+    pq->_rear = pq->_front = 0;
+    return pq;
+}
+ */
+
+
 
 void QueueDestory(Queue* pq)
 {
@@ -69,6 +90,13 @@ STDataType QueueFront(Queue* pq)
 {
     assert(pq);
     STDataType ret = pq->_a[pq->_front%pq->_size];
+    return ret;
+}
+
+STDataType QueueBack(Queue* pq)
+{
+    assert(pq);
+    STDataType ret = pq->_a[pq->_rear-1];
     return ret;
 }
 
