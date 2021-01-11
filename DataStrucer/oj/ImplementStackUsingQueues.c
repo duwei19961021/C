@@ -2,6 +2,10 @@
 // Created by duwei on 2021/1/11.
 //
 
+/*
+ * https://leetcode-cn.com/problems/implement-stack-using-queues/submissions/
+ * */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
