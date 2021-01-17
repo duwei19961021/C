@@ -32,7 +32,7 @@ BTNode* CreateNode(char x)
     return node;
 }
 
-void PrevOrder(BTNode* root)
+void PrevOrder(BTNode* root) // 前序
 {
     if (!root)
     {
@@ -44,7 +44,7 @@ void PrevOrder(BTNode* root)
     PrevOrder(root->_right);
 }
 
-void InOrder(BTNode* root)
+void InOrder(BTNode* root) // 中序
 {
     if (!root)
     {
@@ -56,11 +56,11 @@ void InOrder(BTNode* root)
     InOrder(root->_right);
 }
 
-void PostOrder(BTNode* root)
+void PostOrder(BTNode* root) // 后序
 {
     if (!root)
     {
-//        printf("NULL ");
+        printf("NULL ");
         return;
     }
     InOrder(root->_left);
