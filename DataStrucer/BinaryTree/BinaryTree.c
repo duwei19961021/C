@@ -89,6 +89,36 @@ int TreeLeafSize(BTNode* root)
     return TreeLeafSize(root->_left) + TreeLeafSize(root->_right);
 }
 
+int BinaryTreeLevelKSize(BTNode* root, int k) // 当前树的第k层可以转换成左右子树的第k-1层，层数==1时不需要再分解
+{
+    if (!root)
+        return 0;
+    if (k==1)
+        return 1;
+    return BinaryTreeLevelKSize(root->_left,k-1) + BinaryTreeLevelKSize(root->_right,k-1);
+}
+
+BTNode* BinaryTreeFind(BTNode* root,BTDataType x)
+{
+    if (!root)
+        return NULL;
+    if (root->_data == x)
+        return root;
+    BTNode* LNode = BinaryTreeFind(root->_left,x);
+    if (LNode)
+    {
+        return LNode;
+    }
+
+    BTNode* RNode = BinaryTreeFind(root->_right,x);
+    if (RNode)
+    {
+        return RNode;
+    }
+    return NULL;
+}
+
+
 int main()
 {
     BTNode* A = CreateNode('A');
