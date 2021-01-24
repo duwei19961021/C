@@ -183,8 +183,45 @@ void SelectSort(int* arr, int arrSize)
     }
 }
 
+int GetMidIdx(int* arr ,int left, int right) // 三数取中，让最坏的情况(有序或者接近有序)不会再出现
+{
+    int mid = (left+right)/2;
+    if (arr[left] < arr[mid])
+    {
+        if (arr[mid] < arr[right])
+        {
+            return mid;
+        }
+        else if (arr[left] > arr[right])
+        {
+            return left;
+        }
+        else
+        {
+            return right;
+        }
+    }
+    else // arr[left] >= arr[right]
+    {
+        if (arr[mid] > arr[right])
+        {
+            return mid;
+        }
+        else if (arr[left] < arr[right])
+        {
+            return left;
+        }
+        else
+        {
+            return right;
+        }
+    }
+}
+
 int PartSort(int* arr,int left, int right) // 将比key大的数放在key右边，比key小的数放在key左边
 {
+    int midIndex = GetMidIdx(arr,left,right);
+    Swap(&arr[midIndex],&arr[right]);
     int keyIndex = right;
     while (left<right)
     {
