@@ -9,4 +9,5 @@ void BubbleSort(int* arr, int arrSize); // 冒泡排序
 void HeapSort(int* arr, int arrSize); // 堆排序
 void ShellSort(int* arr, int arrSize);
 void SelectSort(int* arr, int arrSize);
+void QuickSort(int* arr,int left, int right);
 void PrintArr(int* arr, int Size);

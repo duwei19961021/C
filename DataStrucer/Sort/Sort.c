@@ -182,3 +182,33 @@ void SelectSort(int* arr, int arrSize)
         Swap(&arr[max],&arr[end]);
     }
 }
+
+int PartSort(int* arr,int left, int right) // 将比key大的数放在key右边，比key小的数放在key左边
+{
+    int keyIndex = right;
+    while (left<right)
+    {
+        while (left<right && arr[left] <= arr[keyIndex])
+        {
+            left++;
+        }
+        while (left<right && arr[right] >= arr[keyIndex])
+        {
+            right--;
+        }
+        Swap(&arr[right], &arr[left]);
+    }
+    Swap(&arr[left],&arr[keyIndex]);
+    return left; // 返回key的位置，因为key的左边比key小，key的右边全比key大，所以key是中间位置，下次循环不用再参加比较
+}
+
+void QuickSort(int* arr,int left, int right)
+{
+    if (left<right)
+    {
+        int  div = PartSort(arr,left,right); // key的位置
+        QuickSort(arr,left,div-1); // key不再需要参与比较
+        QuickSort(arr,div+1,right);
+    }
+
+}
