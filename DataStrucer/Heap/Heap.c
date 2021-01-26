@@ -130,6 +130,16 @@ HPDataType HeapTop(Heap* php)
     return php->_a[0];
 }
 
+int HeapSize(Heap* php)
+{
+    return php->_size;
+}
+
+int HeapEmpty(Heap* php)
+{
+    return php->_size == 0;
+}
+
 /*
  * top k问题:
  * 建堆 => HeapPop 3次, 选出最前三

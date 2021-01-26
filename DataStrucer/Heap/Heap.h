@@ -24,5 +24,7 @@ void HeapPush(Heap* php, HPDataType x);
 void HeapPop(Heap* php);
 HPDataType HeapTop(Heap* php);
 void HeapSort(Heap* php,int n);
+int HeapSize(Heap* php);
+int HeapEmpty(Heap* php);
 
 #endif //C_HEAP_H
