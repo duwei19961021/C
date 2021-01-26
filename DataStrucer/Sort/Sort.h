@@ -11,3 +11,6 @@ void ShellSort(int* arr, int arrSize);
 void SelectSort(int* arr, int arrSize);
 void QuickSort(int* arr,int left, int right);
 void PrintArr(int* arr, int Size);
+void QuickSortNoR(int* arr, int left, int right);
+void MergeSort(int* arr, int arrSize);
+void MergeSortNoR(int* arr, int arrSize);

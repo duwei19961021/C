@@ -3,6 +3,7 @@
 //
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "Sort.h"
 
 void PrintArr(int* arr, int Size)
@@ -248,4 +249,127 @@ void QuickSort(int* arr,int left, int right)
         QuickSort(arr,div+1,right);
     }
 
+}
+
+// 非递归：1、提高效率(建立栈帧有消耗，可以忽略不计)
+//        2、递归最大的缺陷是：如果栈帧的深度太深，可能会导致栈溢出，栈是M级别。
+//           数据结构模拟非递归，数据是存储在堆上的，堆是G级别。
+void QuickSortNoR(int* arr, int left, int right)
+{
+    Stack st;
+    StackInit(&st);
+    StackPush(&st,left); // 先将left、right依次入栈
+    StackPush(&st,right);
+    while (!StackEmpty(&st))
+    {
+        int right_ = StackTop(&st); // 由于入栈顺序是 left、right，所以先取出的是right
+        StackPop(&st);
+        int left_ = StackTop(&st); // 再取出left
+        StackPop(&st);
+        int div = PartSort(arr,left_,right_); // 调用子函数进行第一次排序
+        // [left,div-1] div [div+1,right]
+        if (div+1 < right_) // 再将右区间 [div+1,right_] push进栈
+        {
+            StackPush(&st,div+1); // 入栈顺序要保持一直
+            StackPush(&st,right_);
+        }
+        if(left_<div-1) // 左区间进栈，[left_,div-1]
+        {
+            StackPush(&st,left_);
+            StackPush(&st,div-1);
+        }
+        // 走到这里结束循环，再回到判断，由于栈 push进去了四个数字(两个区间下标)，栈不为空，
+        // 再取出左区间进行排序，再分再入栈出栈，直至不可再分区间，再开始对右区间进行排序
+    }
+    StackDestory(&st);
+}
+
+// 将数组分割成N个有序小区间(1个数的区间，一个数也算有序)，再合并有序的数组
+void _MergeSort(int* arr,int left, int right, int* tmp)
+{
+    if(left>=right) // 分割退出的条件
+        return;
+    int mid = (left+right)/2; // 拿到中间位置的索引，下一步递归分割，直到不可分为止(分割到只有一个数)
+    _MergeSort(arr,left,mid,tmp); // 递归分割左半边
+    _MergeSort(arr,mid+1,right,tmp); // 递归分割右半边
+    int begin1 = left, end1 = mid; // 走到这里说明已经分割完了，分成了right+1个一个元素的数组
+    int begin2 = mid+1, end2 = right;
+    int index = begin1; // tmp区间起始位置
+
+    while (begin1 <= end1 && begin2 <= end2) // 归并有序数组
+    {
+        if (arr[begin1] < arr[begin2])
+        {
+            tmp[index++] = arr[begin1++];
+        }
+        else
+        {
+            tmp[index++] = arr[begin2++];
+        }
+    }
+    while (begin1<=end1)
+        tmp[index++] = arr[begin1++];
+    while (begin2<=end2)
+        tmp[index++] = arr[begin2++];
+
+    for (int i = left; i <= right; ++i) // 拷贝回原数组，拷贝一定是 <= 闭区间，因为right传入的是闭区间
+    {
+        arr[i] = tmp[i];
+    }
+}
+
+// 归并，递归实现
+void MergeSort(int* arr, int arrSize)
+{
+    int* tmp = malloc(sizeof(int)*arrSize);
+    _MergeSort(arr,0,arrSize-1,tmp);
+    free(tmp);
+
+}
+
+// 归并，非递归实现
+void _MergeSortNoR(int* arr, int begin1, int end1, int begin2, int end2, int* tmp)
+{
+    int left = begin1,right = end2; // 这里必须使用新变量记录数组的起始结束位置，因为经过迭代后begin1会自增
+    int index = begin1; // tmp区间起始位置
+    while (begin1 <= end1 && begin2 <= end2) // 归并有序数组
+    {
+        if (arr[begin1] < arr[begin2])
+        {
+            tmp[index++] = arr[begin1++];
+        }
+        else
+        {
+            tmp[index++] = arr[begin2++];
+        }
+    }
+    while (begin1<=end1)
+        tmp[index++] = arr[begin1++];
+    while (begin2<=end2)
+        tmp[index++] = arr[begin2++];
+    for (int i = left; i <= right; ++i)
+    {
+        arr[i] = tmp[i];
+    }
+}
+
+void MergeSortNoR(int* arr, int arrSize)
+{
+    int* tmp = (int*)malloc(sizeof(int)*arrSize);
+    int gap = 1;
+    while (gap<arrSize)
+    {
+        for (int i = 0; i < arrSize; i+=2*gap)
+        {
+            // [i,i+gap-1] [i+gap, i+2*gap-1]
+            int begin1 = i, end1 = i+gap-1, begin2 = i+gap, end2 =i+gap*2-1;
+            if (begin2 >= arrSize) // begin2大于等于数组长度时说明只存在一组数据(无法分割成两组)
+                break;
+            if (end2>=arrSize) // end2大于等于数组长度则说明无法分割成均等的两组，end2超出了数组的范围
+                end2 = arrSize-1; // 所以需要调整end2的位置，使其不能超出数组范围
+            _MergeSortNoR(arr,begin1,end1,begin2,end2,tmp);
+        }
+        gap*=2;
+    }
+    free(tmp);
 }
