@@ -14,3 +14,4 @@ void PrintArr(int* arr, int Size);
 void QuickSortNoR(int* arr, int left, int right);
 void MergeSort(int* arr, int arrSize);
 void MergeSortNoR(int* arr, int arrSize);
+void CountSort(int* arr, int arrSize);

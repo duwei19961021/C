@@ -4,7 +4,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "Sort.h"
+#include "Stack.h"
 
 void PrintArr(int* arr, int Size)
 {
@@ -373,3 +375,43 @@ void MergeSortNoR(int* arr, int arrSize)
     }
     free(tmp);
 }
+
+void CountSort(int* arr, int arrSize)
+{
+    int min = arr[0];
+    int max = arr[0];
+    for (int i = 0; i < arrSize; ++i)
+    {
+        if (arr[i] > max)
+        {
+            max = arr[i];
+        }
+        if (arr[i] < min)
+        {
+            min = arr[i];
+        }
+    }
+
+    int range = max-min+1;
+    int* countArray = (int*)malloc(sizeof(int)*range);
+    if (!countArray)
+    {
+        printf("malloc failed.\n");
+        exit(-1);
+    }
+    memset(countArray,0,sizeof(int)*range);
+    for (int i = 0; i < arrSize; ++i)
+    {
+        countArray[arr[i]-min]++;
+    }
+
+    int index = 0;
+    for (int i = 0; i < range; ++i)
+    {
+        while (countArray[i]--)
+        {
+            arr[index++] = i+min;
+        }
+    }
+}
+
