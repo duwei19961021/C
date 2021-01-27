@@ -183,6 +183,14 @@ void SelectSort(int* arr, int arrSize)
             max=min;
         }
         Swap(&arr[max],&arr[end]);
+        /*
+        Swap(&arr[end],&arr[min]);
+        if(end == max) // 如果end和max重叠，经过上一步交换之后，那么max的数被换到min的位置上，所以max=min
+        {
+            max=min; // 如果是end和min重叠，上一步则是原地交换，不会影响begin和max的位置。如果是begin和min重叠，end上的未知到小的数被换到begin上，下一步max和begin交换，也不会影响min和end的位置
+        }
+        Swap(&arr[begin],&arr[max]);
+         */
     }
 }
 
