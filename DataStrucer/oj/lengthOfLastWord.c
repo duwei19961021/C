@@ -2,6 +2,11 @@
 // Created by duwei on 2021/2/9.
 //
 
+/*
+ * 最后一个单词的长度
+ * 链接：https://leetcode-cn.com/problems/length-of-last-word/
+ */
+
 int lengthOfLastWord(char * s){
     int lastIndex = strlen(s)-1;
     while(s[lastIndex] == ' ') // 去除末尾的空格
