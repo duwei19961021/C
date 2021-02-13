@@ -102,7 +102,7 @@ void HeapSort(int* arr, int arrSize)
     {
         Swap(&arr[end],&arr[0]);
 		// end--; 如果先end--再建堆,在end = 2 时 end--(即end=1),执行到AdJustDown时下标2位置的数不会参与建堆)
-        AdJustDown(arr,0,end); // 交换之后先重新建堆(仅仅重新构建堆顶的三个数))
+        AdJustDown(arr,0,end); // 交换之后先重新建堆(此时end时作为arrSize传入,因此建堆时arr[end]会被排除掉)
         end--;
     }
 }
